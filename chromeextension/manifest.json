@@ -38,15 +38,6 @@
         "https://*/*",
         "http://*/*"
       ],
-      "css": [
-        "src/content_scripts/content_scripts.css"
-      ]
-    },
-    {
-      "matches": [
-        "https://*/*",
-        "http://*/*"
-      ],
       "js": [
         "bower_components/ddp.js/src/ddp.js",
         "bower_components/q/q.js",
@@ -55,7 +46,11 @@
         "bower_components/asteroid/dist/plugins/google-login.js",
         "bower_components/zepto/zepto.min.js",
         "dist/content_scripts.js"
-      ]
+      ],
+      "css": [
+        "src/content_scripts/content_scripts.css"
+      ],
+      "run_at": "document_end"
     }
   ]
 }

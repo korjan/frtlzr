@@ -1,7 +1,7 @@
 .--bs--link {
   transition: all 0.15s ease-out;
   transform: scale(1);
-  display: block;
+  display: inherit;
 }
 
 .--bs--enabled .--bs--link.--bs--link-bullshit {
