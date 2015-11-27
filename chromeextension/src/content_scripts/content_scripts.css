@@ -1,14 +1,27 @@
 .--bs--link {
-  transition: all 0.15s ease-out;
+  transition: all 0.15s ease-in-out;
   transform: scale(1);
   display: inherit;
 }
 
-.--bs--enabled .--bs--link.--bs--link-bullshit {
-  transform: scale(0.99);
-  opacity: 0.2;
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-1,
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-2,
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-3,
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-4 {
+  transform: scale(0.98);
+  opacity: 0.8;
 }
 
-.--bs--enabled .--bs--link.--bs--link-interesting {
-  transform: scale(1.2);
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-5,
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-6,
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-7,
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-8,
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-9 {
+  transform: scale(0.95);
+  opacity: 0.5;
+}
+
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-1 {
+  transform: scale(0.9);
+  opacity: 0;
 }
