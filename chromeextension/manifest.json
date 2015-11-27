@@ -39,7 +39,7 @@
         "http://*/*"
       ],
       "css": [
-        "dist/content_scripts.css"
+        "src/content_scripts/content_scripts.css"
       ]
     },
     {
