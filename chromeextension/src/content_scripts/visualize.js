@@ -19,6 +19,10 @@ export default class Visualize {
         .uniq()
         .value();
 
+      if (urls.length === 0) {
+        return resolve([]);
+      }
+
       $.ajax({
         type: 'POST',
         url: 'https://cowdung.herokuapp.com/api/classify',
