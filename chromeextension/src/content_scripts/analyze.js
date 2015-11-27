@@ -24,7 +24,7 @@ function getArticleElement() {
   loop(document.body);
   accum =  _.sortBy(accum, a => _.max(a[1])).reverse();
   accum = _.take(accum, 5);
-  accum = _.sortBy(accum, a => a[0].innerText.match(/\b\S+\b/g).length).reverse();
+  accum = _.sortBy(accum, a => wordCount(a[0])).reverse();
 
   return accum[0][0];
 
@@ -35,14 +35,19 @@ function getArticleElement() {
 }
 
 function wordCount(el) {
-  return el.innerText.match(/\b\S+\b/g).length;
+  try {
+    return el.innerText.match(/\b\S+\b/g).length;
+  }
+  catch (e) {
+    return 0;
+  }
 }
 
 
 export default function analyze() {
   var articleEl = getArticleElement();
-  let words = wordCount(articleEl);
-  console.log('word count', words);
+  //let words = wordCount(articleEl);
+  //console.log('word count', words);
   everyTimeUnit(time => {
     let activeScreenSpaces = getActiveScreenSpaces(articleEl);
     activeScreenSpaces.forEach(activeScreenSpace => {
@@ -56,6 +61,7 @@ export default function analyze() {
   });
 };
 
+// TODO we kijken nu alleen nog maar naar het hele scherm
 function getActiveScreenSpaces(articleEl) {
   let articleBox = articleEl.getBoundingClientRect();
   //document.scrollingElement.clientHeight
@@ -65,5 +71,8 @@ function getActiveScreenSpaces(articleEl) {
 }
 
 function emit(url, top, bottom, time) {
-  console.log('emit', url, top, bottom, time);
+  chrome.runtime.sendMessage('', {analysis:{url, top, bottom, time}}, cb => {
+    // do something maybe
+  });
+
 }

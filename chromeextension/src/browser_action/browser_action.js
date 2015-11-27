@@ -3,7 +3,7 @@
 // Similar to runtime.connect but only sends a single message, with an optional response.
 function message(){
   // chrome.extension.sendRequest({ msg: "startFunc" });
-  chrome.runtime.sendMessage('', 'a message', {}, function (cb){console.log('popup callback', cb);});
+  //chrome.runtime.sendMessage('', 'a message', {}, function (cb){console.log('popup callback', cb);});
 
   // If sending to your extension, the runtime.onMessage event will be fired in each page
 }
