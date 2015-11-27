@@ -3,7 +3,7 @@ import _ from 'lodash';
 var pages = {};
 
 export function aggregate({url, top, bottom, time}) {
-  pages[url] = pages[url] || {totalTime:0};
+  pages[url] = pages[url] || {totalTime:0,sent:false};
   let screenId = `${top}x${bottom}`;
   pages[url][screenId] = pages[url][screenId] || 0;
   pages[url][screenId] += time;
@@ -13,7 +13,7 @@ export function aggregate({url, top, bottom, time}) {
 
 export function getInterestings() {
   // TODO even om te testen op 1 gezet!
-  let fiveM = 1 * 60 * 1000;
+  let fiveM = 20 * 1000;
   // is 5m geleden voor 't laatst geupdate
   let inactiveInterestingPages = _.filter(pages, page => {
     return Date.now() - page.lastUpdateTime >= fiveM;
@@ -21,18 +21,17 @@ export function getInterestings() {
 
   // TODO we kijken nu alleen nog maar naar de totalTime
   // is minimaal een minuut gelezen
-  let interestingPages = _.filter(pages, page => {
-    return page.totalTime >= fiveM;
-  });
+  let interestingPages = _.reduce(pages, (result, page, url) => {
+    return !page.sent && page.totalTime >= fiveM ?
+      result.concat([url]) :
+      result;
+  }, []);
 
-  pages = _.reduce(pages, (result, page, url) => {
-    if (!_.contains(interestingPages, page)) {
-      result[url] = page;
+  _.forEach(pages, (page, url) => {
+    if (_.contains(interestingPages, url)) {
+      page.sent = true;
     }
-    return result;
-  }, {});
-
-  console.log('pages', pages);
+  });
 
   return interestingPages;
 }
