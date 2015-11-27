@@ -1,7 +1,6 @@
 module.exports = {
   entry: {
     background: "./chromeextension/src/background/background.js",
-    browser_action: "./chromeextension/src/browser_action/browser_action.js",
     content_scripts: "./chromeextension/src/content_scripts/content_scripts.js",
   },
   output: {
@@ -10,11 +9,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      {
-        test: /\.js?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel'
-      }
+      { test: /\.js?$/, exclude: /(node_modules|bower_components)/, loader: 'babel' }
     ]
   }
 };

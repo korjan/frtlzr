@@ -17,11 +17,10 @@
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-7,
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-8,
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-9 {
-  transform: scale(0.97);
+  transform: scale(0.95);
   opacity: 0.5;
 }
 
-.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-1 {
-  transform: scale(0.95);
-  opacity: 0;
+.--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-1-0 {
+  display: none;
 }
