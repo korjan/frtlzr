@@ -10,10 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "asteroid": "~0.6.1",
-    "zepto": "~1.1.6",
-    "ddp.js": "~1.1.0",
-    "q": "~2.0.2",
-    "lodash": "~3.10.1"
+    "zepto": "~1.1.6"
   },
   "ignore": [
     "**/.*",
