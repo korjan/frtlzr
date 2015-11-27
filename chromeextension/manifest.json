@@ -24,7 +24,7 @@
       "bower_components/asteroid/dist/asteroid.chrome.js",
       "bower_components/asteroid/dist/plugins/facebook-login.js",
       "bower_components/asteroid/dist/plugins/google-login.js",
-      "src/background/background.js"
+      "dist/background.js"
     ]
   },
   "browser_action": {
@@ -39,7 +39,7 @@
         "http://*/*"
       ],
       "css": [
-        "src/content_scripts/content_scripts.css"
+        "dist/content_scripts.css"
       ]
     },
     {
@@ -54,7 +54,7 @@
         "bower_components/asteroid/dist/plugins/facebook-login.js",
         "bower_components/asteroid/dist/plugins/google-login.js",
         "bower_components/zepto/zepto.min.js",
-        "src/content_scripts/content_scripts.js"
+        "dist/content_scripts.js"
       ]
     }
   ]

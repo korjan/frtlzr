@@ -1,0 +1,32 @@
+{
+  "name": "frtlzr",
+  "version": "1.0.0",
+  "description": "Provides information about sources on the internet // removes bullshit links",
+  "main": "index.js",
+  "dependencies": {
+    "extract-text-webpack-plugin": "^0.9.1",
+    "webpack": "^1.12.9"
+  },
+  "devDependencies": {
+    "babel": "^5.0.0",
+    "babel-core": "^5.0.0",
+    "babel-loader": "^5.0.0",
+    "node-sass": "^3.4.2",
+    "sass-loader": "^3.1.2",
+    "webpack": "^1.12.9"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/korjan/frtlzr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/korjan/frtlzr/issues"
+  },
+  "homepage": "https://github.com/korjan/frtlzr"
+}

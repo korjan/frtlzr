@@ -1,3 +1,7 @@
+import Tmp from './tmp';
+console.log('background');
+const tmp = () => 'yo';
+
 console.log('starting background frtlzr');
 
 // https://developer.chrome.com/extensions/runtime#method-sendMessage
