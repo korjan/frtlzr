@@ -28,8 +28,7 @@
     ]
   },
   "browser_action": {
-    "default_icon": "icons/open-48.png",
-    "default_title": ""
+    "default_icon": "icons/open-48.png"
   },
   "content_scripts": [
     {
