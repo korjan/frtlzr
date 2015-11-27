@@ -1,6 +1,13 @@
-/**
- * Place your custom CSS styles here.
- **/
-.__frtlzr {
-  color : red;
+.--bs--link {
+  transition: all 2s ease-out;
+}
+
+.--bs--enabled .--bs--link.--bs--link-positive,
+.--bs--enabled .--bs--link.--bs--link-positive * {
+  color: green;
+}
+
+.--bs--enabled .--bs--link.--bs--link-negative {
+  overflow: hidden;
+  height: 0;
 }
