@@ -45,11 +45,11 @@ export default class Visualize {
   setupLink(apiResult, domNode) {
     domNode.classList.add('--bs--link');
 
-    if (apiResult.bullshit) {
+    // if (apiResult.bullshit) {
       domNode.classList.add('--bs--link-bullshit');
-      domNode.classList.add(`--bs--link-bullshit-0-5`);
-      // domNode.classList.add(`--bs--link-bullshit-${apiResult.bullshit.toString().replace('.', '-')}`);
-    }
+      domNode.classList.add('--bs--link-bullshit-0-5');
+      // domNode.classList.add(`--bs--link-bullshit-${apiResult.bullshit.toFixed(1).replace('.', '-')}`);
+    // }
   }
 
   onKeyDown(e) {
