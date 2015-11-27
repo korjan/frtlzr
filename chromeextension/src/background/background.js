@@ -22,3 +22,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 chrome.runtime.onConnect.addListener(connectDDP(shart));
+
+chrome.browserAction.onClicked.addListener(tab => {
+  shart.call('addBS', tab.url);
+})
