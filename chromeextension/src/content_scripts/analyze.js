@@ -71,9 +71,8 @@ function getActiveScreenSpaces(articleEl) {
 }
 
 function emit(url, top, bottom, time) {
-  console.log('emit');
-  chrome.runtime.sendMessage('', {analysis:{url, top, bottom, time}}, function (cb){
-    console.log('HALO MET CALLBACK', cb);
+  chrome.runtime.sendMessage('', {analysis:{url, top, bottom, time}}, cb => {
+    // do something maybe
   });
 
 }
