@@ -28,7 +28,7 @@
     ]
   },
   "browser_action": {
-    "default_icon": "icons/open-48.png"
+    "default_icon": "icons/open-hollow-48.png"
   },
   "content_scripts": [
     {
