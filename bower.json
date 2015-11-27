@@ -9,7 +9,7 @@
   "moduleType": [],
   "license": "MIT",
   "dependencies": {
-    "asteroid": "~0.6.0",
+    "asteroid": "~0.6.0"
   },
   "ignore": [
     "**/.*",
