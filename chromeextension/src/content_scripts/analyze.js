@@ -6,16 +6,11 @@ function everyTimeUnit(callback) {
   var visible = true;
 
   (function heartbeat() {
-    if (visible) {
+    if (!document.hidden && document.hasFocus()) {
       callback(timeout);
     }
     setTimeout(heartbeat, timeout);
   })();
-
-  document.addEventListener(
-    "webkitvisibilitychange",
-    () => visible = !document.hidden
-  );
 }
 
 // inspired by http://rodp.me/2015/how-to-extract-data-from-the-web.html
