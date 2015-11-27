@@ -1,13 +1,14 @@
 .--bs--link {
-  transition: all 2s ease-out;
+  transition: all 0.15s ease-out;
+  transform: scale(1);
+  display: block;
 }
 
-.--bs--enabled .--bs--link.--bs--link-positive,
-.--bs--enabled .--bs--link.--bs--link-positive * {
-  color: green;
+.--bs--enabled .--bs--link.--bs--link-bullshit {
+  transform: scale(0.99);
+  opacity: 0.2;
 }
 
-.--bs--enabled .--bs--link.--bs--link-negative {
-  overflow: hidden;
-  height: 0;
+.--bs--enabled .--bs--link.--bs--link-interesting {
+  transform: scale(1.2);
 }
