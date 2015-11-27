@@ -3,12 +3,9 @@ import _ from 'lodash';
 export default class Visualize {
   constructor() {
     // Get results from API
-    const apiResults = this.getApiResults();
-
-    // Add classes to links
-    setTimeout(() => {
-      this.setupLinks(apiResults);
-    }, 1000);
+    this.getApiResults()
+      .then(apiResults => this.setupLinks(apiResults))
+      .catch(err => console.warn('Failed to get bullshit', err));
 
     // Toggle view
     document.onkeydown = this.onKeyDown;
@@ -16,6 +13,21 @@ export default class Visualize {
   }
 
   getApiResults() {
+    return new Promise(function(resolve, reject) {
+      const urls = _.chain(document.querySelectorAll('a'))
+        .map(a => _.first(a.href.split('?')))
+        .uniq()
+        .value();
+
+      $.ajax({
+        type: 'POST',
+        url: 'https://cowdung.herokuapp.com/api/classify',
+        data: { urls: urls },
+        success: resolve,
+        error: reject
+      });
+    });
+
     return [
       { // medium
         url: 'https://medium.com/@lawham/phonetic-table-for-trolls-f03c05dc7f6a',
@@ -98,7 +110,8 @@ export default class Visualize {
 
   setupLinks(apiResults) {
     _.each(apiResults, apiResult => {
-      const selector = `[href*="${apiResult.url}"]`;
+      const relativePath = _.last(apiResult.url.split(window.location.hostname));
+      const selector = `[href*="${relativePath}"]`;
       const domNodes = document.querySelectorAll(selector);
       _.each(domNodes, domNode => this.setupLink(apiResult, domNode));
     });
@@ -107,12 +120,11 @@ export default class Visualize {
   setupLink(apiResult, domNode) {
     domNode.classList.add('--bs--link');
 
-    console.log('bs--link-bullshit:', apiResult.bullshit)
-    if (apiResult.bullshit) {
+    // if (apiResult.bullshit) {
       domNode.classList.add('--bs--link-bullshit');
-      domNode.classList.add(`--bs--link-bullshit-${apiResult.bullshit.toString().replace('.', '-')}`);
-      console.log(domNode.classList);
-    }
+      domNode.classList.add(`--bs--link-bullshit-0-5`);
+      // domNode.classList.add(`--bs--link-bullshit-${apiResult.bullshit.toString().replace('.', '-')}`);
+    // }
   }
 
   onKeyDown(e) {
