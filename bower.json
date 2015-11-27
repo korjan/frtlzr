@@ -1,0 +1,24 @@
+{
+  "name": "frtlzr",
+  "homepage": "https://github.com/korjan/frtlzr",
+  "authors": [
+    "korjan <korjanvanwieringen@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "dependencies": {
+    "asteroid": "~0.6.0",
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "asteroid": "~0.6.1"
+  }
+}

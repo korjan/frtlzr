@@ -1,16 +1,29 @@
-$.getJSON('http://localhost:3000/bs', function(data) {
+// Injected into every tab
+// 1. Retrieve all links and enricht them.
+// 2. show the conversation, for example, better sources, twitter links mentioning this url
+
+// TODO: use meteor API (anonymous REST call still?)
+$.getJSON('https://manure.herokuapp.com/bs', function(data) {
     //data is the JSON string
     console.log('bs', data);
+
     data.forEach(function(el){
       selector = "a[href='"+ el.link + "']";
       console.log('sel', selector);
       $(selector).replaceWith('<span class="__frtlzr"><em>BULLSHIT</em></span>');
 
     });
+
+    chrome.runtime.sendMessage('', 'a tab message', function (cb){console.log('popup callback', cb);});
 });
+
+// chrome.runtime.sendMessage(string extensionId, any message, object options, function responseCallback)
+var port = chrome.runtime.connect();
+port.postMessage("where does this go?");
 
 
 // THE MEDIA are broken, people are misinformed.
+// media are searching for a story.
 // ASSUMPTION: more context about sources of information
 // will lead to better decision and more empathy
 

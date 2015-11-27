@@ -10,6 +10,22 @@
     "128": "icons/icon128.png"
   },
   "default_locale": "en",
+  "permissions" :["contextMenus", "tabs", "storage", "activeTab"],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "bower_components/ddp.js/src/ddp.js",
+      "bower_components/q/q.js",
+      "bower_components/asteroid/dist/asteroid.chrome.js",
+      "bower_components/asteroid/dist/plugins/facebook-login.js",
+      "bower_components/asteroid/dist/plugins/google-login.js",
+      "src/background.js"]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_title": "",
+    "default_popup": "src/popup.html"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -24,6 +40,11 @@
         "https://*/*", "http://*/*"
       ],
       "js": [
+        "bower_components/ddp.js/src/ddp.js",
+        "bower_components/q/q.js",
+        "bower_components/asteroid/dist/asteroid.chrome.js",
+        "bower_components/asteroid/dist/plugins/facebook-login.js",
+        "bower_components/asteroid/dist/plugins/google-login.js",
         "src/inject/zepto.min.js",
         "src/inject/inject.js"
       ]
