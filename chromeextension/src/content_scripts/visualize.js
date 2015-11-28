@@ -3,6 +3,7 @@ import {wordCount,getArticleElement,canonicalUrl} from '../utils';
 
 export default class Visualize {
   constructor(topics) {
+    console.log('topics',topics)
     this.topics = topics;
 
     let getTopicGiphy = this.getGiphy();
@@ -10,7 +11,10 @@ export default class Visualize {
     (function loop() {
     Promise.all([this.getApiResults(), getTopicGiphy])
       .then(([apiResults, topicGiphy]) => this.setupLinks(apiResults, topicGiphy))
-      .catch(err => console.warn('Failed to get bullshit', err));
+      .catch(err => {
+        throw err;
+        console.warn('Failed to get bullshit', err)
+      });
       setTimeout(loop.bind(this), 1000);
     }.bind(this))();
 
@@ -22,6 +26,7 @@ export default class Visualize {
   getApiResults() {
     return new Promise(function(resolve, reject) {
       let urls = _.chain(document.querySelectorAll('a'))
+        .filter(a => a.href)
         .map(a => _.first(a.href.split('?')))
         .uniq()
         .value();
@@ -62,30 +67,22 @@ export default class Visualize {
   }
 
   setupLinks(apiResults, topicGiphy) {
-    console.log('apiResults',apiResults.length, apiResults)
+
     _.each(apiResults, apiResult => {
       if (apiResult.url == canonicalUrl(window.location.href)) {
 
         if (document.querySelectorAll('.--bs--article').length < 1) {
           let articleEl = getArticleElement();
+          console.log('articleEl',articleEl)
           articleEl.classList.add('--bs--article');
-
-          let parent = articleEl.parentNode;
-          articleEl.parentNode.removeChild(articleEl);
-
-          let wrap = document.createElement('div');
-          wrap.className = '--bs--wrap';
-
-          parent.appendChild(wrap);
-
-          wrap.appendChild(articleEl);
-
 
           if (topicGiphy) {
             let img = document.createElement('img');
-            img.src = topicGiphy; //'http://media3.giphy.com/media/yoJC2qNujv3gJWP504/giphy.gif';
+            img.style.backgroundImage = `url(${topicGiphy})`;
+            // img.src = topicGiphy; //'http://media3.giphy.com/media/yoJC2qNujv3gJWP504/giphy.gif';
             img.className = '--bs--image';
-            wrap.appendChild(img);
+            console.log(img);
+            document.body.appendChild(img);
           }
 
 

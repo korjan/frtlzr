@@ -4,25 +4,29 @@
 
 .--bs--article {
   transition: all 0.15s ease-in-out;
-  transform: scale(1);
+  opacity: 1;
   display: inherit;
 }
 
 .--bs--enabled .--bs--article {
-  transform: scale(0.95);
   opacity: 0.5;
 }
 
 .--bs--image {
-  transition: all 0.6s ease-in-out;
-  width: 100%;
-  position:absolute;
-  top: 0; left: 0;
-  transform: scale(0);
+  transition: all 0.2s ease-in-out;
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  background-size: cover;
+  background-position: center center;
+  z-index: 99999999999999999;
 }
 
 .--bs--enabled .--bs--image {
-  transform: scale(1);
+  opacity: 1;
 }
 
 .--bs--link {
