@@ -1,7 +1,5 @@
-.--bs--link {
-  transition: all 0.15s ease-in-out;
-  transform: scale(1);
-  display: inherit;
+.--bs--wrap {
+  position:relative;
 }
 
 .--bs--article {
@@ -13,6 +11,24 @@
 .--bs--enabled .--bs--article {
   transform: scale(0.95);
   opacity: 0.5;
+}
+
+.--bs--image {
+  transition: all 0.6s ease-in-out;
+  width: 100%;
+  position:absolute;
+  top: 0; left: 0;
+  transform: scale(0);
+}
+
+.--bs--enabled .--bs--image {
+  transform: scale(1);
+}
+
+.--bs--link {
+  transition: all 0.15s ease-in-out;
+  transform: scale(1);
+  display: inherit;
 }
 
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-1,

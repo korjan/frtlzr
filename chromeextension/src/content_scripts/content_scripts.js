@@ -1,15 +1,16 @@
 import Visualize from './visualize';
 import analyze from './analyze';
-const visualize = new Visualize();
 import topicExtract from './topicExtract';
 import authors from './authors';
 
 analyze();
+let topics = topicExtract();
+const visualize = new Visualize(topics);
 
 console.log('meta', {
   authors: authors(),
   url : window.location.href,
-  topics: topicExtract()
+  topics: topics
 })
 
 $.ajax({
