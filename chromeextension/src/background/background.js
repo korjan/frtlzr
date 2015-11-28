@@ -1,19 +1,24 @@
 import _ from 'lodash';
 import connectDDP from './connect-ddp';
 import {aggregate, getInterestings} from './analysis-aggregator';
+import IconState from './icon-state';
 
 var shart = window.shart || new Asteroid("localhost:3000");
 connectDDP(shart);
 
+var iconState = new IconState(shart);
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   let response;
 
-  if (message.analysis) {
-    response = aggregate(message.analysis);
-    let interestings = getInterestings();
-    if (!_.isEmpty(interestings)) {
-      shart.call('addInteresting', interestings);
-    }
+  switch (message.type) {
+    case 'analysis':
+      response = onMessageAnalysis(message);
+    break;
+
+    case 'content-loaded':
+      response = onMessageContentLoaded(message);
+    break;
   }
 
   if (response) {
@@ -21,33 +26,31 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-chrome.browserAction.onClicked.addListener(tab => {
-  console.log('bullshit!', tab.url)
-  shart.call('toggleBS', tab.url);
-})
+function onMessageAnalysis(message) {
+  if (!message.analysis) return;
 
-shart.subscribe('bsForUser').ready.then(() => {
-  const bsForUser = shart.getCollection('PageRank');
-  const bsForUserQuery = bsForUser.reactiveQuery({});
-  updateTabs(bsForUserQuery);
-  bsForUserQuery.on("change", () => updateTabs(bsForUserQuery));
-});
+  let response = aggregate(message.analysis);
+  let interestings = getInterestings();
 
+  if (!_.isEmpty(interestings)) {
+    shart.call('addInteresting', interestings);
+  }
 
-function updateTabs(bsForUserQuery) {
-  chrome.tabs.query({}, (tabs) => {
-    _.each(tabs, tab => {
-      const isBs = _.find(bsForUserQuery.result, bs => {
-        return tab.url.indexOf(bs._id) > -1 && _.indexOf(bs.bullshit, shart.userId) > -1;
-      });
+  return response;
+}
 
-      chrome.browserAction.setIcon({
-        tabId: tab.id,
-        path: {
-          "19": `icons/open-${ isBs ? '' : 'hollow-' }19.png`,
-          "38": `icons/open-${ isBs ? '' : 'hollow-' }76.png`
-        }
-      });
-    });
+function onMessageContentLoaded(message) {
+  chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
+    iconState.setForTabId(tabs[0].id);
   });
 }
+
+chrome.browserAction.onClicked.addListener(tab => {
+  shart.call('toggleBS', tab.url).result.then(() => {
+    iconState.setForTabId(tab.id)
+  });
+})
+
+chrome.tabs.onActivated.addListener(e => {
+  iconState.setForTabId(e.tabId);
+});
