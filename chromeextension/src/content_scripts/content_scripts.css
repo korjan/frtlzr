@@ -39,7 +39,7 @@
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-2,
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-3,
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-4 {
-  transform: scale(0.98);
+  transform: scale(1);
   opacity: 0.8;
 }
 
@@ -48,7 +48,7 @@
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-7,
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-8,
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-9 {
-  transform: scale(0.95);
+  transform: scale(0.98);
   opacity: 0.5;
 }
 
