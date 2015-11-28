@@ -22,6 +22,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 chrome.browserAction.onClicked.addListener(tab => {
+  console.log('bullshit!', tab.url)
   shart.call('toggleBS', tab.url);
 })
 

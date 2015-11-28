@@ -3,9 +3,12 @@ import _ from 'lodash';
 export default class Visualize {
   constructor() {
     // Get results from API
+    // (function loop() {
     this.getApiResults()
       .then(apiResults => this.setupLinks(apiResults))
       .catch(err => console.warn('Failed to get bullshit', err));
+    //   setTimeout(loop, 1000);
+    // }.bind(this))();
 
     // Toggle view
     document.onkeydown = this.onKeyDown;
@@ -14,14 +17,12 @@ export default class Visualize {
 
   getApiResults() {
     return new Promise(function(resolve, reject) {
-      const urls = _.chain(document.querySelectorAll('a'))
+      let urls = _.chain(document.querySelectorAll('a'))
         .map(a => _.first(a.href.split('?')))
         .uniq()
         .value();
 
-      if (urls.length === 0) {
-        return resolve([]);
-      }
+      urls.push(window.location.href);
 
       $.ajax({
         type: 'POST',
@@ -35,10 +36,18 @@ export default class Visualize {
 
   setupLinks(apiResults) {
     _.each(apiResults, apiResult => {
-      const relativePath = _.last(apiResult.url.split(window.location.hostname));
-      const selector = `[href*="${relativePath}"]`;
-      const domNodes = document.querySelectorAll(selector);
-      _.each(domNodes, domNode => this.setupLink(apiResult, domNode));
+      if (apiResult.score == null) {
+        return;
+      }
+      if (apiResult.url == window.location.href) {
+        let articleEl = getArticleElement();
+        articleEl.classList.add('--bs--article');
+      } else {
+        const relativePath = _.last(apiResult.url.split(window.location.hostname));
+        const selector = `[href*="${relativePath}"]`;
+        const domNodes = document.querySelectorAll(selector);
+        _.each(domNodes, domNode => this.setupLink(apiResult, domNode));
+      }
     });
   }
 
@@ -60,5 +69,35 @@ export default class Visualize {
 
   onKeyUp(e) {
     document.body.classList.remove('--bs--enabled');
+  }
+}
+
+
+
+
+
+
+
+function getArticleElement() {
+  var accum = [];
+  loop(document.body);
+  accum =  _.sortBy(accum, a => _.max(a[1])).reverse();
+  accum = _.take(accum, 5);
+  accum = _.sortBy(accum, a => wordCount(a[0])).reverse();
+
+  return accum[0][0];
+
+  function loop(el) {
+    accum.push([el, _.countBy(el.children, c => c.tagName)]);
+    _.toArray(el.children).forEach(loop);
+  }
+}
+
+function wordCount(el) {
+  try {
+    return el.innerText.match(/\b\S+\b/g).length;
+  }
+  catch (e) {
+    return 0;
   }
 }

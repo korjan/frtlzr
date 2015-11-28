@@ -4,6 +4,14 @@
   display: inherit;
 }
 
+.--bs--article {
+  transition: all 0.15s ease-in-out;
+  transform: scale(1);
+  display: inherit;
+  transform: scale(0.95);
+  opacity: 0.5;
+}
+
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-1,
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-2,
 .--bs--enabled .--bs--link.--bs--link-bullshit.--bs--link-bullshit-0-3,

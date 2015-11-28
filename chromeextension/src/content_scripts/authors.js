@@ -26,10 +26,12 @@ export default function() {
 
   if (authors.length == 0){
 
-    pathArray = location.href.split( '/' );
-    protocol = pathArray[0];
-    host = pathArray[2];
-    authors.push(host);
+    let pathArray = location.href.split( '/' );
+    if (pathArray) {
+      let protocol = pathArray[0];
+      let host = pathArray[2];
+      authors.push(host);
+    }
   }
   return authors;
 };
