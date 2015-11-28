@@ -24,5 +24,12 @@ export default function() {
       authors.push(authorsAsItemProp[i].innerText);
   }
 
+  if (authors.length == 0){
+
+    pathArray = location.href.split( '/' );
+    protocol = pathArray[0];
+    host = pathArray[2];
+    authors.push(host);
+  }
   return authors;
 };
