@@ -1,14 +1,15 @@
 import _ from 'lodash';
+import {wordCount,getArticleElement,canonicalUrl} from '../utils';
 
 export default class Visualize {
   constructor() {
     // Get results from API
-    // (function loop() {
+    (function loop() {
     this.getApiResults()
       .then(apiResults => this.setupLinks(apiResults))
       .catch(err => console.warn('Failed to get bullshit', err));
-    //   setTimeout(loop, 1000);
-    // }.bind(this))();
+      setTimeout(loop.bind(this), 1000);
+    }.bind(this))();
 
     // Toggle view
     document.onkeydown = this.onKeyDown;
@@ -67,39 +68,4 @@ export default class Visualize {
   onKeyUp(e) {
     document.body.classList.remove('--bs--enabled');
   }
-}
-
-
-
-
-
-
-
-function getArticleElement() {
-  var accum = [];
-  loop(document.body);
-  accum =  _.sortBy(accum, a => _.max(a[1])).reverse();
-  accum = _.take(accum, 5);
-  accum = _.sortBy(accum, a => wordCount(a[0])).reverse();
-
-  return accum[0][0];
-
-  function loop(el) {
-    accum.push([el, _.countBy(el.children, c => c.tagName)]);
-    _.toArray(el.children).forEach(loop);
-  }
-}
-
-function wordCount(el) {
-  try {
-    return el.innerText.match(/\b\S+\b/g).length;
-  }
-  catch (e) {
-    return 0;
-  }
-}
-
-function canonicalUrl(url) {
-  let noprotocol = url.replace(/.*?:\/\//g, "");
-  return noprotocol.split(/[?#]/)[0];
 }
