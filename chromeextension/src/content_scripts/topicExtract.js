@@ -3,8 +3,10 @@ import lda from 'lda';
 export default function() {
   let articleEl = getArticleElement();
   let text = articleEl.innerText;
-  var documents = text.match( /[^\.!\?]+[\.!\?]+/g );
+
+  var documents = text.match( /[^\.!\?]+[\.!\?]+/gm );
   var result = lda(documents, 1, 5);
+  
   return result[0].map(r => r.term);
 }
 
