@@ -51,7 +51,7 @@ export default class Visualize {
 
       $.ajax({
         type: 'GET',
-        url: 'http://api.giphy.com/v1/gifs/search?q=' + encodeURIComponent(this.topics[0]) + '&api_key=dc6zaTOxFJmzC&limit=1&offset=0',
+        url: '//api.giphy.com/v1/gifs/search?q=' + encodeURIComponent(this.topics[0]) + '&api_key=dc6zaTOxFJmzC&limit=1&offset=0',
         success: function(data) {
           try {
             console.log('giphy', data);
@@ -61,7 +61,11 @@ export default class Visualize {
             resolve(null);
           }
         },
-        error: reject
+        error: function(err) {
+          console.log('errr', err);
+          // reject(err);
+          resolve(null);
+        }
       });
     });
   }
