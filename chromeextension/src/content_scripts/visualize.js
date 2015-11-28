@@ -25,7 +25,7 @@ export default class Visualize {
 
       $.ajax({
         type: 'POST',
-        url: 'https://cowdung.herokuapp.com/api/classify',
+        url: 'http://localhost:3000/api/classify',
         data: { urls: urls },
         success: resolve,
         error: reject
