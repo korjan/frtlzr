@@ -8,6 +8,9 @@
   transition: all 0.15s ease-in-out;
   transform: scale(1);
   display: inherit;
+}
+
+.--bs--enabled .--bs--article {
   transform: scale(0.95);
   opacity: 0.5;
 }

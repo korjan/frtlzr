@@ -36,10 +36,7 @@ export default class Visualize {
 
   setupLinks(apiResults) {
     _.each(apiResults, apiResult => {
-      if (apiResult.score == null) {
-        return;
-      }
-      if (apiResult.url == window.location.href) {
+      if (apiResult.url == canonicalUrl(window.location.href)) {
         let articleEl = getArticleElement();
         articleEl.classList.add('--bs--article');
       } else {
@@ -100,4 +97,9 @@ function wordCount(el) {
   catch (e) {
     return 0;
   }
+}
+
+function canonicalUrl(url) {
+  let noprotocol = url.replace(/.*?:\/\//g, "");
+  return noprotocol.split(/[?#]/)[0];
 }
