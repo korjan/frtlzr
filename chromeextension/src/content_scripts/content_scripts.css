@@ -23,6 +23,7 @@
   background-size: cover;
   background-position: center center;
   z-index: 99999999999999999;
+  pointer-events: none;
 }
 
 .--bs--enabled .--bs--image {
