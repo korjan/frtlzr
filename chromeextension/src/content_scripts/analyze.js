@@ -59,8 +59,5 @@ function getActiveScreenSpaces(articleEl) {
 }
 
 function emit(url, top, bottom, time) {
-  chrome.runtime.sendMessage('', {analysis:{url, top, bottom, time}}, cb => {
-    // do something maybe
-  });
-
+  chrome.runtime.sendMessage({ type:'analysis', analysis: { url, top, bottom, time } });
 }

@@ -23,3 +23,6 @@ $.ajax({
   success: () => console.log('succes!'),
   dataType: "json"
 });
+
+console.log('content_scripts');
+chrome.runtime.sendMessage({ type:'content-loaded' });
