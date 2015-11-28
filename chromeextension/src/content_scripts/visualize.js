@@ -2,7 +2,9 @@ import _ from 'lodash';
 import {wordCount,getArticleElement,canonicalUrl} from '../utils';
 
 export default class Visualize {
-  constructor() {
+  constructor(iconState) {
+    this.iconState = iconState;
+
     // Get results from API
     (function loop() {
     this.getApiResults()
@@ -62,10 +64,12 @@ export default class Visualize {
   onKeyDown(e) {
     if(e.altKey) {
       document.body.classList.add('--bs--enabled');
+      chrome.runtime.sendMessage({ type:'visualize-changed', isVisualized:true });
     }
   }
 
   onKeyUp(e) {
     document.body.classList.remove('--bs--enabled');
+    chrome.runtime.sendMessage({ type:'visualize-changed', isVisualized:false });
   }
 }

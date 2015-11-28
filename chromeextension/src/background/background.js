@@ -19,6 +19,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     case 'content-loaded':
       response = onMessageContentLoaded(message);
     break;
+
+    case 'visualize-changed':
+      response = onMessageVisualizeChanged(message);
+    break;
   }
 
   if (response) {
@@ -40,17 +44,19 @@ function onMessageAnalysis(message) {
 }
 
 function onMessageContentLoaded(message) {
-  chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-    iconState.setForTabId(tabs[0].id);
-  });
+  iconState.setIsSavedForCurrentTab();
+}
+
+function onMessageVisualizeChanged(message) {
+  iconState.setIsVisualizeForCurrentTab(message.isVisualized);
 }
 
 chrome.browserAction.onClicked.addListener(tab => {
   shart.call('toggleBS', tab.url).result.then(() => {
-    iconState.setForTabId(tab.id)
+    iconState.setIsSavedForTabId(tab.id)
   });
 })
 
 chrome.tabs.onActivated.addListener(e => {
-  iconState.setForTabId(e.tabId);
+  iconState.setIsSavedForTabId(e.tabId);
 });

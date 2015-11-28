@@ -13,7 +13,21 @@ export default class IconState {
     });
   }
 
-  setForTabId(tabId) {
+  setIsSavedForCurrentTab() {
+    chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
+      this.setIsSavedForTabId(tabs[0].id);
+    });
+  }
+
+  setIsVisualizeForCurrentTab(isVisualized) {
+    chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
+      this.tabId = tabs[0].id;
+      this.isVisualized = isVisualized;
+      this.updateIcon();
+    });
+  }
+
+  setIsSavedForTabId(tabId) {
     this.tabId = tabId;
 
     chrome.tabs.get(this.tabId, tab => {
@@ -29,13 +43,13 @@ export default class IconState {
   }
 
   updateIcon() {
-    console.log('this.isSaved', this.isSaved);
+    const imageBase = `icons/${ this.isVisualized ? 'open' : 'closed' }-${ this.isSaved ? 'active-' : '' }`;
 
     chrome.browserAction.setIcon({
       tabId: this.tabId,
       path: {
-        "19": `icons/open-${ this.isSaved ? 'active-' : '' }19.png`,
-        "38": `icons/open-${ this.isSaved ? 'active-' : '' }76.png`
+        "19": `${imageBase}19.png`,
+        "38": `${imageBase}76.png`
       }
     });
   }
