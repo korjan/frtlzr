@@ -20,6 +20,6 @@ $.ajax({
     url : window.location.href,
     topics: topicExtract()
   },
-  success: onSucces,
+  success: () => console.log('succes!'),
   dataType: "json"
 });
