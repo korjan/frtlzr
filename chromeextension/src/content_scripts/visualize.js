@@ -2,9 +2,7 @@ import _ from 'lodash';
 import {wordCount,getArticleElement,canonicalUrl} from '../utils';
 
 export default class Visualize {
-  constructor(iconState) {
-    this.iconState = iconState;
-
+  constructor() {
     // Get results from API
     (function loop() {
     this.getApiResults()
